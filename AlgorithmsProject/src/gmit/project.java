@@ -12,7 +12,7 @@ public class project {
 	private static ArrayList<ArrayList<String>> mylist = new ArrayList<ArrayList<String>>();
 	private static ArrayList<String> lol = new ArrayList<String>();
 	// Declaring int variables
-	private static int encryptioncounter=0,decryptioncounter=0,lastindexcounter=0,mylistindexcounter=0;
+	private static int encryptioncounter=0,decryptioncounter=0,lastindexcounter=0,mylistindexcounter=0,resortcounter=0;
 	// Declaring String variables
 	private static String password,value;
 	private static String result;
@@ -35,13 +35,17 @@ public class project {
 			List<String> firstCharandMore= new ArrayList<>();
 			char c = password.charAt(i);
 			firstCharandMore.add(String.valueOf(c));
-			  
+			String resortcountertostring= String.valueOf(resortcounter);
 		        mylist.add((ArrayList<String>) firstCharandMore);
+		        // Adds index for resort to arraylists
+		        mylist.get(i).add(resortcountertostring);
+		        //mylist.add((ArrayList<String>) resortcountertostring);
+		        resortcounter++;
 		    }
 		
 		//Starts Timer
 		long startTime = System.nanoTime();
-		long startTime2 = System.nanoTime();
+		
 		// Reads in File in UTF-8 format
 		// gets back a character
 		BufferedReader reader = new BufferedReader(
@@ -65,11 +69,13 @@ public class project {
 			System.out.println(seconds2+" Encryption");
 			// Creates new Arraylist listToSort (Copy of mylist)
 			// Sorts Array lists in alphabetic order by first character from each list
-			List<List<String>> listToSort = new ArrayList<>(mylist);	
-			listToSort.sort((l1, l2) -> l1.get(0).compareTo(l2.get(0)));
+			sortarraylists();
+			// Resorts arraylists using the index
+			resortarraylist();
 			
 			// Calls decryption method
 			decrypt();
+			// Calls write to file method
 			writetofile();
 			// Ends Timer
 			long endTime   = System.nanoTime();
@@ -78,8 +84,17 @@ public class project {
 			double seconds = (double)totalTime / 1000000000.0;
 			System.out.println(seconds+" Total time");		 
 	}
+	private static void resortarraylist() {
+
+		mylist.sort((l1, l2) -> l1.get(1).compareTo(l2.get(1)));
+	}
 	// ------------------------------------ End Main -----------------------------------------
 	
+	private static void sortarraylists() {
+		
+		mylist.sort((l1, l2) -> l1.get(0).compareTo(l2.get(0)));
+	}
+
 	private static void writetofile() throws FileNotFoundException, UnsupportedEncodingException {
 		PrintWriter writer = new PrintWriter("finished.txt", "UTF-8");
 		StringBuilder builder = new StringBuilder();
@@ -168,7 +183,7 @@ public class project {
 		stringmap.put("XF", "U");//
 		stringmap.put("XG", "T");//
 		stringmap.put("XV", "I");//
-		stringmap.put("XX", "8");//
+		stringmap.put("XX", "8");//		
 		stringmap.put("P", "AA");//
 		stringmap.put("H", "AD");//
 		stringmap.put("0", "AF");//
