@@ -7,8 +7,7 @@ import java.nio.charset.Charset;
 public class project {
 	// Creating Hashmap
 	private static HashMap<String, String> stringmap = new HashMap<String, String>();
-	private static HashMap<String, Character> charmap = new HashMap<String, Character>();
-	private static HashMap<Character, String> charmap2 = new HashMap<Character, String>();
+
 	// Creating String Array lists
 	private static ArrayList<ArrayList<String>> mylist = new ArrayList<ArrayList<String>>();
 	private static ArrayList<String> lol = new ArrayList<String>();
