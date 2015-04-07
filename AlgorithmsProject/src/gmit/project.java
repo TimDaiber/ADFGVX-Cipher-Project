@@ -1,45 +1,35 @@
 package gmit;
 
-import java.io.BufferedReader;
 import java.util.*;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.Scanner;
-import java.util.Set;
 import java.io.*;
+import java.nio.charset.Charset;
 
 public class project {
-	// test one
-	private static ArrayList<String> lol = new ArrayList<String>();
+	// Creating Hashmap
 	private static HashMap<String, String> map = new HashMap<String, String>();
-	static ArrayList<ArrayList<String>> mylist = new ArrayList<ArrayList<String>>();
-	static List<String> mycode = new ArrayList<String>();
-	 static ArrayList<String> thisisit;
-	private static String mypasprase;
-	private static int counter=0;
-	private static int decryptioncounter = 0;
-	private static String value;
-	private static int last=0;
-	private static String result;
-	private static int anothercounter=0;
+	// Creating String Array lists
+	private static ArrayList<ArrayList<String>> mylist = new ArrayList<ArrayList<String>>();
+	private static ArrayList<String> lol = new ArrayList<String>();
+	// Declaring int variables
+	private static int encryptioncounter=0,decryptioncounter=0,lastindexcounter=0,mylistindexcounter=0;
+	// Declaring String variables
+	private static String password,value,result;
+	
+	
+	// ----------------------------------------------- Main start --------------------------------------------------------
 	public static void main(String[] args) throws IOException {
-		
+		// Method to populate HashMap
 		putstuffinmap();	
 		
 		System.out.println("Pleaseinput your passphrase");
+		// Gets user Input
 		Scanner in = new Scanner(System.in);
-		mypasprase = in.nextLine();
-		for (int i = 0; i < mypasprase.length(); i++) {
+		password = in.nextLine();
+		// Starts for loop
+		// Creates Array list in number of the amount of characters of the password
+		for (int i = 0; i < password.length(); i++) {
 			List<String> firstCharandMore= new ArrayList<>();
-			char c = mypasprase.charAt(i);
+			char c = password.charAt(i);
 			firstCharandMore.add(String.valueOf(c));
 			  
 		        mylist.add((ArrayList<String>) firstCharandMore);
@@ -66,45 +56,37 @@ public class project {
 			
 			long endTime   = System.currentTimeMillis();
 			long totalTime = endTime - startTime;
-			System.out.println(totalTime);
-			 
+			System.out.println(totalTime);		 
 	}
 
 	private static void encrypt(String string) {
 		
 		 value= map.get(string);
-		mylist.get(counter).add(value);	
-		counter++;			
-		if(counter>=mypasprase.length()){
-			counter=0;
-			last++;
-		}
-		
-		
+		mylist.get(encryptioncounter).add(value);	
+		encryptioncounter++;			
+		if(encryptioncounter>=password.length()){
+			encryptioncounter=0;
+			lastindexcounter++;
+		}		
 	}
-	
 	
 	private static void decrypt() {
 
 		int thiscounter=0;
 		while(decryptioncounter   != thiscounter  ){
-			for(int i=0;i <mypasprase.length() ;i++){
+			for(int i=0;i <password.length() ;i++){
 				
-				String ba = mylist.get(i).get(anothercounter);				
+				String ba = mylist.get(i).get(mylistindexcounter);				
 				result= map.get(ba);
 				lol.add(result);
 				thiscounter++;
-				if(anothercounter >=last){
+				if(mylistindexcounter >=lastindexcounter){
 					decryptioncounter =thiscounter;
 				}
 			}
-			anothercounter++;
-		}
-		
-		
-		
+			mylistindexcounter++;
+		}		
 	}
-
 
 	public static void putstuffinmap(){
 		map.put("AA", "P");//AA - P
@@ -185,13 +167,11 @@ public class project {
 		map.put("GH", " ");//
 		map.put("VH", "'");//
 		map.put("XH", ",");//
-		
 		map.put(".", "AH");//
 		map.put("!", "DH");//
 		map.put("?", "FH");//
 		map.put(" ", "GH");//
 		map.put("'", "VH");//
-		map.put(",", "XH");//
-		
+		map.put(",", "XH");//	
 	}
 }
