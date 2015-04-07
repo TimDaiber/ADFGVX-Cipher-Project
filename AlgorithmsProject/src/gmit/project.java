@@ -25,8 +25,10 @@ public class project {
 		// Gets user Input
 		Scanner in = new Scanner(System.in);
 		password = in.nextLine();
+		
 		// Starts for loop
 		// Creates Array list in number of the amount of characters of the password
+		// Adds created arraylists to Arraylist<List> mylist.
 		for (int i = 0; i < password.length(); i++) {
 			List<String> firstCharandMore= new ArrayList<>();
 			char c = password.charAt(i);
@@ -35,7 +37,10 @@ public class project {
 		        mylist.add((ArrayList<String>) firstCharandMore);
 		    }
 		
+		//Starts Timer
 		long startTime = System.currentTimeMillis();
+		// Reads in File in UTF-8 format
+		// gets back a character
 		BufferedReader reader = new BufferedReader(
 				new InputStreamReader(
 			        new FileInputStream("WarAndPeace-LeoTolstoy.txt"),
@@ -44,21 +49,31 @@ public class project {
 			while((c = reader.read()) != -1) {
 			  char string = (char) c;
 			  
+			  // Converts Character to upper case String
+			  // Passes the string into encryption method
 			  encrypt(Character.toString(string).toUpperCase());
+			  // Adds one to counter
 			  decryptioncounter++;
 			  
 			}
 			
+			// Creates new Arraylist listToSort (Copy of mylist)
+			// Sorts Array lists in alphabetic order by first character from each list
 			List<List<String>> listToSort = new ArrayList<>(mylist);	
 			listToSort.sort((l1, l2) -> l1.get(0).compareTo(l2.get(0)));
 			
+			// Calls decryption method
 			decrypt();
 			
+			// Ends Timer
 			long endTime   = System.currentTimeMillis();
 			long totalTime = endTime - startTime;
+			// Prints Time
 			System.out.println(totalTime);		 
 	}
-
+	// ------------------------------------ End Main -----------------------------------------
+	
+	// -------------------------------- Encryption Start -------------------------------------
 	private static void encrypt(String string) {
 		
 		 value= map.get(string);
@@ -69,7 +84,9 @@ public class project {
 			lastindexcounter++;
 		}		
 	}
+	// --------------------------------- Encryption End ---------------------------------------
 	
+	// --------------------------------- Decryption Start -------------------------------------
 	private static void decrypt() {
 
 		int thiscounter=0;
@@ -87,7 +104,9 @@ public class project {
 			mylistindexcounter++;
 		}		
 	}
-
+	// ---------------------------------- Decryption End ---------------------------------------
+	
+	// --------------------------------- Map population start ---------------------------------
 	public static void putstuffinmap(){
 		map.put("AA", "P");//AA - P
 		map.put("AD", "H");//AD - H
@@ -174,4 +193,5 @@ public class project {
 		map.put("'", "VH");//
 		map.put(",", "XH");//	
 	}
+	// --------------------------------- Map population End -----------------------------------
 }
