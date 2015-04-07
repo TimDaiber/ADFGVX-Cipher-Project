@@ -126,6 +126,7 @@ public class project {
 	// ---------------------------------- Decryption End ---------------------------------------
 	
 	// --------------------------------- Map population start ---------------------------------
+	
 	public static void putstuffinstrinmap(){
 		stringmap.put("AA", "P");//AA - P
 		stringmap.put("AD", "H");//AD - H
