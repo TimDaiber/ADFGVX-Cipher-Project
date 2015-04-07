@@ -40,7 +40,8 @@ public class project {
 		    }
 		
 		//Starts Timer
-		long startTime = System.currentTimeMillis();
+		long startTime = System.nanoTime();
+		long startTime2 = System.nanoTime();
 		// Reads in File in UTF-8 format
 		// gets back a character
 		BufferedReader reader = new BufferedReader(
@@ -58,7 +59,10 @@ public class project {
 			  decryptioncounter++;
 			  
 			}
-			
+			long endTime2   = System.nanoTime();
+			long totalTime2 = endTime2 - startTime;
+			double seconds2 = (double)totalTime2 / 1000000000.0;
+			System.out.println(seconds2+" Encryption");
 			// Creates new Arraylist listToSort (Copy of mylist)
 			// Sorts Array lists in alphabetic order by first character from each list
 			List<List<String>> listToSort = new ArrayList<>(mylist);	
@@ -68,10 +72,11 @@ public class project {
 			decrypt();
 			writetofile();
 			// Ends Timer
-			long endTime   = System.currentTimeMillis();
+			long endTime   = System.nanoTime();
 			long totalTime = endTime - startTime;
 			// Prints Time
-			System.out.println(totalTime);		 
+			double seconds = (double)totalTime / 1000000000.0;
+			System.out.println(seconds+" Total time");		 
 	}
 	// ------------------------------------ End Main -----------------------------------------
 	
