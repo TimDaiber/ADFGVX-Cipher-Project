@@ -183,8 +183,15 @@ public class project {
 		map.put("DH", "!");//
 		map.put("FH", "?");//
 		map.put("GH", " ");//
-		map.put("V", "'");//
-		map.put("X", ",");//
+		map.put("VH", "'");//
+		map.put("XH", ",");//
+		
+		map.put(".", "AH");//
+		map.put("!", "DH");//
+		map.put("?", "FH");//
+		map.put(" ", "GH");//
+		map.put("'", "VH");//
+		map.put(",", "XH");//
 		
 	}
 }
