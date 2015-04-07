@@ -6,20 +6,23 @@ import java.nio.charset.Charset;
 
 public class project {
 	// Creating Hashmap
-	private static HashMap<String, String> map = new HashMap<String, String>();
+	private static HashMap<String, String> stringmap = new HashMap<String, String>();
+	private static HashMap<String, Character> charmap = new HashMap<String, Character>();
+	private static HashMap<Character, String> charmap2 = new HashMap<Character, String>();
 	// Creating String Array lists
 	private static ArrayList<ArrayList<String>> mylist = new ArrayList<ArrayList<String>>();
 	private static ArrayList<String> lol = new ArrayList<String>();
 	// Declaring int variables
 	private static int encryptioncounter=0,decryptioncounter=0,lastindexcounter=0,mylistindexcounter=0;
 	// Declaring String variables
-	private static String password,value,result;
+	private static String password,value;
+	private static String result;
 	
 	
 	// ----------------------------------------------- Main start --------------------------------------------------------
 	public static void main(String[] args) throws IOException {
 		// Method to populate HashMap
-		putstuffinmap();	
+		putstuffinstrinmap();
 		
 		System.out.println("Pleaseinput your passphrase");
 		// Gets user Input
@@ -64,7 +67,7 @@ public class project {
 			
 			// Calls decryption method
 			decrypt();
-			
+			writetofile();
 			// Ends Timer
 			long endTime   = System.currentTimeMillis();
 			long totalTime = endTime - startTime;
@@ -73,14 +76,31 @@ public class project {
 	}
 	// ------------------------------------ End Main -----------------------------------------
 	
+	private static void writetofile() throws FileNotFoundException, UnsupportedEncodingException {
+		PrintWriter writer = new PrintWriter("finished.txt", "UTF-8");
+		StringBuilder builder = new StringBuilder();
+		for (String value : lol) {
+		    builder.append(value);
+		}
+		String s = builder.toString();
+		//String s = lol.toString();
+		writer.println(s);
+		writer.close();
+		
+	}
+	
+	
 	// -------------------------------- Encryption Start -------------------------------------
 	private static void encrypt(String string) {
-		
-		 value= map.get(string);
-		mylist.get(encryptioncounter).add(value);	
+		 
+		// Gets
+		value= stringmap.get(string);
+		mylist.get(encryptioncounter).add(value);
+		// Adds one to counter
 		encryptioncounter++;			
 		if(encryptioncounter>=password.length()){
 			encryptioncounter=0;
+			// Adds one to counter
 			lastindexcounter++;
 		}		
 	}
@@ -94,7 +114,7 @@ public class project {
 			for(int i=0;i <password.length() ;i++){
 				
 				String ba = mylist.get(i).get(mylistindexcounter);				
-				result= map.get(ba);
+				result= stringmap.get(ba);
 				lol.add(result);
 				thiscounter++;
 				if(mylistindexcounter >=lastindexcounter){
@@ -107,91 +127,104 @@ public class project {
 	// ---------------------------------- Decryption End ---------------------------------------
 	
 	// --------------------------------- Map population start ---------------------------------
-	public static void putstuffinmap(){
-		map.put("AA", "P");//AA - P
-		map.put("AD", "H");//AD - H
-		map.put("AF", "0");//
-		map.put("AG", "Q");//
-		map.put("AV", "G");//
-		map.put("AX", "6");//
-		map.put("DA", "4");//
-		map.put("DD", "M");//
-		map.put("DF", "E");//
-		map.put("DG", "A");//
-		map.put("DV", "1");//
-		map.put("DX", "Y");//
-		map.put("FA", "L");//
-		map.put("FD", "2");//
-		map.put("FF", "N");//
-		map.put("FG", "O");//
-		map.put("FV", "F");//
-		map.put("FX", "D");//
-		map.put("GA", "X");//
-		map.put("GD", "K");//
-		map.put("GF", "R");//
-		map.put("GG", "3");//
-		map.put("GV", "C");//
-		map.put("GX", "V");//
-		map.put("VA", "S");//
-		map.put("VD", "5");//
-		map.put("VF", "Z");//
-		map.put("VG", "W");//
-		map.put("VV", "7");//
-		map.put("VX", "B");//
-		map.put("XA", "J");//
-		map.put("XD", "9");//
-		map.put("XF", "U");//
-		map.put("XG", "T");//
-		map.put("XV", "I");//
-		map.put("XX", "8");//
-		map.put("P", "AA");//
-		map.put("H", "AD");//
-		map.put("0", "AF");//
-		map.put("Q", "AG");//
-		map.put("G", "AV");//
-		map.put("6", "AX");//
-		map.put("4", "DA");//
-		map.put("M", "DD");//
-		map.put("E", "DF");//
-		map.put("A", "DG");//
-		map.put("1", "DV");//
-		map.put("Y", "DX");//
-		map.put("L", "FA");//
-		map.put("2", "FD");//
-		map.put("N", "FF");//
-		map.put("O", "FG");//
-		map.put("F", "FV");//
-		map.put("D", "FX");//
-		map.put("X", "GA");//
-		map.put("K", "GD");//
-		map.put("R", "GF");//
-		map.put("3", "GG");//
-		map.put("C", "GV");//
-		map.put("V", "GX");//
-		map.put("S", "VA");//
-		map.put("5", "VD");//
-		map.put("Z", "VF");//
-		map.put("W", "VG");//
-		map.put("7", "VV");//
-		map.put("B", "VX");//
-		map.put("J", "XA");//
-		map.put("9", "XD");//
-		map.put("U", "XF");//
-		map.put("T", "XG");//
-		map.put("I", "XV");//
-		map.put("8", "XX");//	
-		map.put("AH", ".");//
-		map.put("DH", "!");//
-		map.put("FH", "?");//
-		map.put("GH", " ");//
-		map.put("VH", "'");//
-		map.put("XH", ",");//
-		map.put(".", "AH");//
-		map.put("!", "DH");//
-		map.put("?", "FH");//
-		map.put(" ", "GH");//
-		map.put("'", "VH");//
-		map.put(",", "XH");//	
+	public static void putstuffinstrinmap(){
+		stringmap.put("AA", "P");//AA - P
+		stringmap.put("AD", "H");//AD - H
+		stringmap.put("AF", "0");//
+		stringmap.put("AG", "Q");//
+		stringmap.put("AV", "G");//
+		stringmap.put("AX", "6");//
+		stringmap.put("DA", "4");//
+		stringmap.put("DD", "M");//
+		stringmap.put("DF", "E");//
+		stringmap.put("DG", "A");//
+		stringmap.put("DV", "1");//
+		stringmap.put("DX", "Y");//
+		stringmap.put("FA", "L");//
+		stringmap.put("FD", "2");//
+		stringmap.put("FF", "N");//
+		stringmap.put("FG", "O");//
+		stringmap.put("FV", "F");//
+		stringmap.put("FX", "D");//
+		stringmap.put("GA", "X");//
+		stringmap.put("GD", "K");//
+		stringmap.put("GF", "R");//
+		stringmap.put("GG", "3");//
+		stringmap.put("GV", "C");//
+		stringmap.put("GX", "V");//
+		stringmap.put("VA", "S");//
+		stringmap.put("VD", "5");//
+		stringmap.put("VF", "Z");//
+		stringmap.put("VG", "W");//
+		stringmap.put("VV", "7");//
+		stringmap.put("VX", "B");//
+		stringmap.put("XA", "J");//
+		stringmap.put("XD", "9");//
+		stringmap.put("XF", "U");//
+		stringmap.put("XG", "T");//
+		stringmap.put("XV", "I");//
+		stringmap.put("XX", "8");//
+		stringmap.put("P", "AA");//
+		stringmap.put("H", "AD");//
+		stringmap.put("0", "AF");//
+		stringmap.put("Q", "AG");//
+		stringmap.put("G", "AV");//
+		stringmap.put("6", "AX");//
+		stringmap.put("4", "DA");//
+		stringmap.put("M", "DD");//
+		stringmap.put("E", "DF");//
+		stringmap.put("A", "DG");//
+		stringmap.put("1", "DV");//
+		stringmap.put("Y", "DX");//
+		stringmap.put("L", "FA");//
+		stringmap.put("2", "FD");//
+		stringmap.put("N", "FF");//
+		stringmap.put("O", "FG");//
+		stringmap.put("F", "FV");//
+		stringmap.put("D", "FX");//
+		stringmap.put("X", "GA");//
+		stringmap.put("K", "GD");//
+		stringmap.put("R", "GF");//
+		stringmap.put("3", "GG");//
+		stringmap.put("C", "GV");//
+		stringmap.put("V", "GX");//
+		stringmap.put("S", "VA");//
+		stringmap.put("5", "VD");//
+		stringmap.put("Z", "VF");//
+		stringmap.put("W", "VG");//
+		stringmap.put("7", "VV");//
+		stringmap.put("B", "VX");//
+		stringmap.put("J", "XA");//
+		stringmap.put("9", "XD");//
+		stringmap.put("U", "XF");//
+		stringmap.put("T", "XG");//
+		stringmap.put("I", "XV");//
+		stringmap.put("8", "XX");//	
+		stringmap.put("AH", ".");//
+		stringmap.put("DH", "!");//
+		stringmap.put("FH", "?");//
+		stringmap.put("GH", " ");//
+		stringmap.put("VH", "'");//
+		stringmap.put("XH", ",");//
+		stringmap.put(".", "AH");//
+		stringmap.put("!", "DH");//
+		stringmap.put("?", "FH");//
+		stringmap.put(" ", "GH");//
+		stringmap.put("'", "VH");//
+		stringmap.put(",", "XH");//		
+		stringmap.put("AP", "]");//
+		stringmap.put("DP", "[");//
+		stringmap.put("FP", "~");//
+		stringmap.put("GP", "&");//
+		stringmap.put("VP", ":");//
+		stringmap.put("XP", ";");//
+		stringmap.put("AP", "-");//"
+		stringmap.put("DP", "");//
+		stringmap.put("FP", "*");//
+		stringmap.put("GP", "^");//
+		stringmap.put("VP", "\"");//
+		stringmap.put(null, " ");//
 	}
 	// --------------------------------- Map population End -----------------------------------
+	
 }
