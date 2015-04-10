@@ -11,11 +11,13 @@ public class project {
 	// Creating String Array lists
 	private static ArrayList<ArrayList<String>> mylist = new ArrayList<ArrayList<String>>();
 	private static ArrayList<String> lol = new ArrayList<String>();
+	private static ArrayList<Character> lol2 = new ArrayList<Character>();
 	// Declaring int variables
-	private static int encryptioncounter=0,decryptioncounter=0,lastindexcounter=0,mylistindexcounter=0,resortcounter=0;
+	private static int encryptioncounter=0,decryptioncounter=0,lastindexcounter=0,
+			mylistindexcounter=0,resortcounter=0,count=0;
 	// Declaring String variables
 	private static String password,value;
-	private static String result;
+	private static String result,text;
 	
 	
 	// ----------------------------------------------- Main start --------------------------------------------------------
@@ -28,6 +30,10 @@ public class project {
 		Scanner in = new Scanner(System.in);
 		password = in.nextLine();
 		
+		System.out.println("Please input the file name you want to encrypt.(WarAndPeace-LeoTolstoy.txt)");
+		// Gets user Input
+		Scanner tin = new Scanner(System.in);
+		 text = in.nextLine();
 		// Starts for loop
 		// Creates Array list in number of the amount of characters of the password
 		// Adds created arraylists to Arraylist<List> mylist.
@@ -50,12 +56,12 @@ public class project {
 		// gets back a character
 		BufferedReader reader = new BufferedReader(
 				new InputStreamReader(
-			        new FileInputStream("WarAndPeace-LeoTolstoy.txt"),
+			        new FileInputStream(text),
 			        Charset.forName("UTF-8")));
 			int c;
 			while((c = reader.read()) != -1) {
 			  char string = (char) c;
-			  
+			 
 			  // Converts Character to upper case String
 			  // Passes the string into encryption method
 			  encrypt(Character.toString(string).toUpperCase());
@@ -84,18 +90,27 @@ public class project {
 			double seconds = (double)totalTime / 1000000000.0;
 			System.out.println(seconds+" Total time");		 
 	}
-	private static void resortarraylist() {
-
-		mylist.sort((l1, l2) -> l1.get(1).compareTo(l2.get(1)));
-	}
 	// ------------------------------------ End Main -----------------------------------------
 	
+	// -------------------------------------resorting-----------------------------------------
+	private static void resortarraylist() {
+		// Resorts lists using index 1 (The numbers assigned to that index))
+		mylist.sort((l1, l2) -> l1.get(1).compareTo(l2.get(1)));
+	}
+	// ------------------------------------End resorting --------------------------------------
+	
+	
+	
+	// ------------------------------------ Sorting ------------------------------------------
 	private static void sortarraylists() {
-		
+		// Sorting lists in alphabetical order by index 0
 		mylist.sort((l1, l2) -> l1.get(0).compareTo(l2.get(0)));
 	}
+	// ------------------------------------End sorting ---------------------------------------
 
+	// ------------------------------------write to file --------------------------------------
 	private static void writetofile() throws FileNotFoundException, UnsupportedEncodingException {
+		// Prints to array list lol to file
 		PrintWriter writer = new PrintWriter("finished.txt", "UTF-8");
 		StringBuilder builder = new StringBuilder();
 		for (String value : lol) {
@@ -112,14 +127,16 @@ public class project {
 	// -------------------------------- Encryption Start -------------------------------------
 	private static void encrypt(String string) {
 		 
-		// Gets
+		// Gets coherent value from map
 		value= stringmap.get(string);
+		// adds value to mylist at index encryptioncounter
 		mylist.get(encryptioncounter).add(value);
 		// Adds one to counter
-		encryptioncounter++;			
+		encryptioncounter++;
+		// Resets encryptioncounter 
 		if(encryptioncounter>=password.length()){
 			encryptioncounter=0;
-			// Adds one to counter
+			// Adds one to lastindexcounter
 			lastindexcounter++;
 		}		
 	}
@@ -127,13 +144,17 @@ public class project {
 	
 	// --------------------------------- Decryption Start -------------------------------------
 	private static void decrypt() {
-
+		
 		int thiscounter=0;
+		// runs until decryptioncounter is = to thiscounter or 
+		// mylistindexcounter is = to lastindexcounter
 		while(decryptioncounter   != thiscounter  ){
 			for(int i=0;i <password.length() ;i++){
-				
-				String ba = mylist.get(i).get(mylistindexcounter);				
+				// gets value from Arraylist
+				String ba = mylist.get(i).get(mylistindexcounter);
+				// gets coherent value from map
 				result= stringmap.get(ba);
+				// adds value to arraylist lol
 				lol.add(result);
 				thiscounter++;
 				if(mylistindexcounter >=lastindexcounter){
