@@ -22,8 +22,8 @@ public class TestRunner {
 	
 	// ----------------------------------------------- Main start --------------------------------------------------------
 	public static void main(String[] args) throws IOException {
-		// Method to populate HashMap
-		putstuffinstrinmap();
+		
+		
 		
 		System.out.println("Pleaseinput your passphrase");
 		// Gets user Input
@@ -37,6 +37,10 @@ public class TestRunner {
 		 
 		//Starts Timer
 		 long startTime = System.nanoTime();
+		 
+		// Method to populate HashMap
+		 putstuffinstrinmap();
+		 
 		// Starts for loop
 		// Creates Array list in number of the amount of characters of the password
 		// Adds created arraylists to Arraylist<List> mylist.
@@ -52,9 +56,6 @@ public class TestRunner {
 		        //mylist.add((ArrayList<String>) resortcountertostring);
 		        resortcounter++;
 		    }
-		
-		//Starts Timer
-		
 		
 		// Reads in File in UTF-8 format
 		// gets back a character
