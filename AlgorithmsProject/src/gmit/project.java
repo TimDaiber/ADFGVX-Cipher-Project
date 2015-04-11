@@ -11,10 +11,10 @@ public class project {
 	// Creating String Array lists
 	private static ArrayList<ArrayList<String>> mylist = new ArrayList<ArrayList<String>>();
 	private static ArrayList<String> lol = new ArrayList<String>();
-	private static ArrayList<Character> lol2 = new ArrayList<Character>();
+	
 	// Declaring int variables
 	private static int encryptioncounter=0,decryptioncounter=0,lastindexcounter=0,
-			mylistindexcounter=0,resortcounter=0,count=0;
+			mylistindexcounter=0,resortcounter=0;
 	// Declaring String variables
 	private static String password,value;
 	private static String result,text;
@@ -34,6 +34,10 @@ public class project {
 		// Gets user Input
 		Scanner tin = new Scanner(System.in);
 		 text = in.nextLine();
+		 
+		//Starts Timer
+		 long startTime = System.nanoTime();
+		 
 		// Starts for loop
 		// Creates Array list in number of the amount of characters of the password
 		// Adds created arraylists to Arraylist<List> mylist.
@@ -50,7 +54,7 @@ public class project {
 		    }
 		
 		//Starts Timer
-		long startTime = System.nanoTime();
+		
 		
 		// Reads in File in UTF-8 format
 		// gets back a character
@@ -69,20 +73,22 @@ public class project {
 			  decryptioncounter++;
 			  
 			}
-			long endTime2   = System.nanoTime();
-			long totalTime2 = endTime2 - startTime;
-			double seconds2 = (double)totalTime2 / 1000000000.0;
-			System.out.println(seconds2+" Encryption");
+			//long endTime2   = System.nanoTime();
+			//long totalTime2 = endTime2 - startTime;
+			//double seconds2 = (double)totalTime2 / 1000000000.0;
+			//System.out.println(seconds2+" Encryption");
 			// Creates new Arraylist listToSort (Copy of mylist)
 			// Sorts Array lists in alphabetic order by first character from each list
 			sortarraylists();
+			
+			writetofileencrypted();
 			// Resorts arraylists using the index
 			resortarraylist();
 			
 			// Calls decryption method
 			decrypt();
 			// Calls write to file method
-			writetofile();
+			writetofilefin();
 			// Ends Timer
 			long endTime   = System.nanoTime();
 			long totalTime = endTime - startTime;
@@ -92,6 +98,20 @@ public class project {
 	}
 	// ------------------------------------ End Main -----------------------------------------
 	
+	// Writes encrypted message to file.
+	private static void writetofileencrypted() throws FileNotFoundException, UnsupportedEncodingException {
+		// TODO Auto-generated method stub
+		PrintWriter writer2 = new PrintWriter("encrypted.txt", "UTF-8");
+		StringBuilder builder2 = new StringBuilder();
+		for (ArrayList<String> value : mylist) {
+		    builder2.append(value);
+		}
+		String s = builder2.toString();
+		//String s = lol.toString();
+		writer2.println(s);
+		writer2.close();
+	}
+
 	// -------------------------------------resorting-----------------------------------------
 	private static void resortarraylist() {
 		// Resorts lists using index 1 (The numbers assigned to that index))
@@ -109,7 +129,7 @@ public class project {
 	// ------------------------------------End sorting ---------------------------------------
 
 	// ------------------------------------write to file --------------------------------------
-	private static void writetofile() throws FileNotFoundException, UnsupportedEncodingException {
+	private static void writetofilefin() throws FileNotFoundException, UnsupportedEncodingException {
 		// Prints to array list lol to file
 		PrintWriter writer = new PrintWriter("finished.txt", "UTF-8");
 		StringBuilder builder = new StringBuilder();
