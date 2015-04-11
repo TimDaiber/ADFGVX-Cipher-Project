@@ -1,5 +1,7 @@
 Requirement: java 1.8 for sorting
 
+github: https://github.com/Timber90/ADFGVX-Cipher-Project
+
 Hello this is the readme file of my project. (Tim Daiber)
 What the program does:
 1.	Asks user for a password.(Password can be as long as you want and can contain any characters or symbols)
