@@ -1,3 +1,5 @@
+Requirement: java 1.8 for sorting
+
 Hello this is the readme file of my project. (Tim Daiber)
 What the program does:
 1.	Asks user for a password.(Password can be as long as you want and can contain any characters or symbols)
@@ -6,7 +8,7 @@ What the program does:
 4.	Reads in the file char by char 
 a.	Encrypts letters
 b.	Adds encrypted letters to the matrix
-5.	Sorts matrix in alphabetical of the password
+5.	Sorts matrix in alphabetical of the password (I am using java 1.8 it is needed in my code to sort the matrix)
 6.	Creates file and writes encrypted and sorted matrix to file
 7.	Resorts the matrix to its original order.
 8.	Decrypts the file and adds it to an arraylist of strings
