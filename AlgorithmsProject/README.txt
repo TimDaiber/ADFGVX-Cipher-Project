@@ -14,6 +14,8 @@ b.	Adds encrypted letters to the matrix
 8.	Decrypts the file and adds it to an arraylist of strings
 9.	Writes decrypted arraylist to file.(file called finished.txt is  back to readable text)
 
+I have not split my program into classes since it was running slower when I did.
+
 How to run it:
 •	Enter password
 •	Enter file name you want to encrypt
